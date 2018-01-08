@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.edittext);
         textView.setText("ここにもじ");
-        String string = editText.getText().toString();
 
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(buttonListener);
@@ -55,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         findViewById(R.id.button_add).setOnClickListener(buttonOperatorListener);
-        findViewById(R.id.button_divide).setOnClickListener(buttonOperatorListener);
         findViewById(R.id.button_equal).setOnClickListener(buttonOperatorListener);
+        findViewById(R.id.button_divide).setOnClickListener(buttonOperatorListener);
         findViewById(R.id.button_multiply).setOnClickListener(buttonOperatorListener);
         findViewById(R.id.button_subtract).setOnClickListener(buttonOperatorListener);
 
@@ -65,28 +64,33 @@ public class MainActivity extends AppCompatActivity {
     int recentOperator = R.id.button_equal;
     double result;
     boolean isOperatorKeyPushed;    // 計算キーが押されたことを記憶
-    
+    CharSequence number1;
+    CharSequence number2;
 
     View.OnClickListener buttonOperatorListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Button operatorButton = (Button) view;
-            double value = Double.parseDouble(editText.getText().toString());
-            if (recentOperator == R.id.button_equal) {
-                result = value;
-            } else {
-                result = calc(recentOperator, result, value);
-                editText.setText(String.valueOf(result));
+                Button operatorButton = (Button) view;
+                if (editText.getText().toString().isEmpty() == false) {
+                    double value = Double.parseDouble(editText.getText().toString());
+                    editText.setText("");
+                    if (recentOperator == R.id.button_equal) {
+                        result = value;
+                    } else {
+                        result = calc(recentOperator, result, value);
+                        editText.setText(String.valueOf(result));
+                    }
+                    recentOperator = operatorButton.getId();
+                    textView.setText(operatorButton.getText());
+                    isOperatorKeyPushed = true;
+                }
             }
-            recentOperator = operatorButton.getId();
-            textView.setText(operatorButton.getText());
-            isOperatorKeyPushed = true;
-        }
     };
 
     View.OnClickListener buttonNumberListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            System.out.println("buttonNumberListener");
             Button button = (Button) view;
             editText.append(button.getText());
         }
@@ -94,17 +98,18 @@ public class MainActivity extends AppCompatActivity {
     };
 
     double calc(int operator, double value1, double value2) {
+        System.out.println("calc");
         switch (operator) {
-            case R.id.button_add:
-                return value1 + value2;
-            case R.id.button_subtract:
-                return value1 - value2;
-            case R.id.button_multiply:
-                return value1 * value2;
-            case R.id.button_divide:
-                return value1 / value2;
-            default:
-                return value1;
-        }
+                case R.id.button_add:
+                    return value1 + value2;
+                case R.id.button_subtract:
+                    return value1 - value2;
+                case R.id.button_multiply:
+                    return value1 * value2;
+                case R.id.button_divide:
+                    return value1 / value2;
+                default:
+                    return value1;
+            }
     }
 }
