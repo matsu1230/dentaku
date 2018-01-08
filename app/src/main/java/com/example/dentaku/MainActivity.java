@@ -70,27 +70,26 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener buttonOperatorListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-                Button operatorButton = (Button) view;
-                if (editText.getText().toString().isEmpty() == false) {
-                    double value = Double.parseDouble(editText.getText().toString());
-                    editText.setText("");
-                    if (recentOperator == R.id.button_equal) {
-                        result = value;
-                    } else {
-                        result = calc(recentOperator, result, value);
-                        editText.setText(String.valueOf(result));
-                    }
-                    recentOperator = operatorButton.getId();
-                    textView.setText(operatorButton.getText());
-                    isOperatorKeyPushed = true;
+            Button operatorButton = (Button) view;
+            if (editText.getText().toString().isEmpty() == false) {
+                double value = Double.parseDouble(editText.getText().toString());
+                editText.setText("");
+                if (recentOperator == R.id.button_equal) {
+                    result = value;
+                } else {
+                    result = calc(recentOperator, result, value);
+                    editText.setText(String.valueOf(result));
                 }
+                recentOperator = operatorButton.getId();
+                textView.setText(operatorButton.getText());
+                isOperatorKeyPushed = true;
             }
+        }
     };
 
     View.OnClickListener buttonNumberListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            System.out.println("buttonNumberListener");
             Button button = (Button) view;
             editText.append(button.getText());
         }
@@ -98,18 +97,21 @@ public class MainActivity extends AppCompatActivity {
     };
 
     double calc(int operator, double value1, double value2) {
-        System.out.println("calc");
         switch (operator) {
-                case R.id.button_add:
-                    return value1 + value2;
-                case R.id.button_subtract:
-                    return value1 - value2;
-                case R.id.button_multiply:
-                    return value1 * value2;
-                case R.id.button_divide:
+            case R.id.button_add:
+                return value1 + value2;
+            case R.id.button_subtract:
+                return value1 - value2;
+            case R.id.button_multiply:
+                return value1 * value2;
+            case R.id.button_divide:
+                if (value2 != 0) {
                     return value1 / value2;
-                default:
-                    return value1;
-            }
+                } else {
+                    return 0;
+                }
+            default:
+                return value1;
+        }
     }
 }

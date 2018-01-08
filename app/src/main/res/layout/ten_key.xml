@@ -10,6 +10,41 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/button_c"
+            style="?attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="C" />
+
+        <Button
+            android:id="@+id/button_percent"
+            style="?attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%" />
+
+
+        <Button
+            android:id="@+id/button_plus_minus"
+            style="?attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+/-" />
+
+        <Button
+            android:id="@+id/button"
+            style="?attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AC" />
+    </TableRow>
+
+    <TableRow
+        style="?attr/actionBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
             android:id="@+id/button_7"
             style="?attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
